@@ -28,9 +28,9 @@ console.log(KorKerTer(5));   //5 a sugár
 
 
 interface Auto{
-    Gyártó: string, 
-    Típus: string,
-    Hengerűrtartalom: number,
+    gyarto: string, 
+    tipus: string,
+    hengerurtartalom: number,
     BenzinesE: boolean
 }
 
@@ -47,3 +47,60 @@ TS!!
 - Keszits alprogramot, ami megadja a parameterul kapott auto tombbol a benzinesek darabszamat
 - A valtoztatasokat toltsd fel a github repodba
 */
+
+function MinHengerUrtartalom(autok:Auto[]):Auto{   //autok tömbből egy Autot fog visszaadni
+    var min:Auto = autok[0];                       //minimumérékkiválasztás Auto az autok tömbből
+    for(var i:number = 0; i < autok.length; i++){  //végigmegyünk a tömb elemein
+       //if elágazás megvizsgálja hogy a legkisebb hengerűrtartalmú megtekintett autó nagyobb-e a jelenleg vizsgáltnál
+       if(autok[i].hengerurtartalom < min.hengerurtartalom){
+          min = autok[i];                          //<<ha igen akkor a min-t felülirjuk autok i.elemével
+       }
+    }
+    return min;                                    //visszaadjuk a minimumnak tekintett járművet
+}
+
+function BenzinesDb(autok:Auto[]):number{          //autok tömbből egy számot fog visszaadni
+    var db:number = 0;                             // darabszámot lenullázzuk 
+    for(var i:number = 0; autok.length; i++){      // autok tömb elemein végigmegyünk
+       // if elágazás megvizsgálja, hogy az éppen vizsgált auto BenzinesE értéke megegyezik-e a true-val
+       if(autok[i].BenzinesE == true){
+           db++                                    //<< ha benzines akkor növeljük a darabszámot
+       }
+    } 
+    return db;                    
+}
+
+var a1:Auto = {
+    gyarto: "Opel",
+    tipus: "Astra",
+    hengerurtartalom: 1600,
+    BenzinesE: true
+};
+
+var a2:Auto = {
+    gyarto: "BMW",
+    tipus: "i3",
+    hengerurtartalom: 0,
+    BenzinesE: false
+};
+
+var a3:Auto = {
+    gyarto: "Volkswagen",
+    tipus: "Passat",
+    hengerurtartalom: 2200,
+    BenzinesE: false
+};
+
+var a4:Auto = {
+    gyarto: "Ford",
+    tipus: "Mondeo",
+    hengerurtartalom: 1700,
+    BenzinesE: true
+};
+
+var autok:Auto[] = [a1, a2, a3, a4];
+
+console.log(MinHengerUrtartalom(autok));
+console.log(BenzinesDb(autok));
+
+
